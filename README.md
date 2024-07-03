@@ -754,6 +754,64 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
   </tr>
 </table>
 
+7. Crear el segundo JFrame Form:
+
+   - Formulario (JFrame Form) para listar y buscar videojuegos. A esta ventana la llamaremos frmListaVideojuegos y su diseño se puede ver en la siguiente imagen:
+     - Diseño del frmListaVideojuegos:
+
+     - Desglose de controles utilizados:
+
+<table>
+        <thead>
+            <tr>
+                <th>Control</th>
+                <th>Propiedad</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>JFrame</td>
+            <td>defaultCloseOperation</td>
+            <td>EXIT_ON_CLOSE</td>
+          </tr>
+          <tr>
+            <td>JLabel</td>
+            <td>text</td>
+            <td>Lista de Videojuegos</td>
+          </tr>
+          <tr>
+            <td>JTable</td>
+            <td>Variable Name</td>
+            <td>tblVideojuegos</td>
+          </tr>
+          <tr>
+            <td>JTextField</td>
+            <td>Variable Name</td>
+            <td>txtBuscar</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>text</td>
+            <td>Buscar</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>Variable Name</td>
+            <td>btnBuscar</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>text</td>
+            <td>Actualizar</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>Variable Name</td>
+            <td>btnActualizar</td>
+          </tr>
+        </tbody>
+</table>
 1. 
 
 

@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que maneja las operaciones de base de datos para la entidad Videojuegos.
- * 
+ * Clase que maneja las operaciones de base de datos para la entidad
+ * Videojuegos.
+ *
  * @autor seth
  */
 public class VideojuegosDAO {
@@ -16,6 +17,7 @@ public class VideojuegosDAO {
     private final String SQL_UPDATE = "UPDATE videojuegos SET titulo = ?, plataforma = ?, genero = ?, precio = ?, stock = ?, imagen = ? WHERE id = ?";
     private final String SQL_DELETE = "DELETE FROM videojuegos WHERE id = ?";
     private final String SQL_SELECT = "SELECT * FROM videojuegos";
+    private final String SQL_SELECTBUSQUEDAID = "SELECT * FROM videojuegos WHERE id = ?";
     private final String SQL_SELECTBUSQUEDANOMBRE = "SELECT * FROM videojuegos WHERE titulo = ?";
 
     /**
@@ -110,7 +112,7 @@ public class VideojuegosDAO {
 
         try {
             conn = ConnectionMySQL.getConnection(); // Obtenemos la conexión desde ConnectionMySQL
-            stmt = conn.prepareStatement(SQL_SELECTBUSQUEDANOMBRE); // Preparamos la consulta SQL para seleccionar por nombre
+            stmt = conn.prepareStatement(SQL_SELECTBUSQUEDAID); // Preparamos la consulta SQL para seleccionar por id
             stmt.setInt(1, id); // Asignamos el valor del ID al parámetro de la consulta SQL
             rs = stmt.executeQuery(); // Ejecutamos la consulta de selección
 
@@ -132,6 +134,45 @@ public class VideojuegosDAO {
             ConnectionMySQL.close(conn); // Cerramos la conexión
         }
         return videojuego; // Retornamos el objeto Videojuegos
+    }
+
+    /**
+     * Método para obtener un videojuego por su ID.
+     *
+     * @param nombre El nombre del videojuego a obtener
+     * @return El la lista de Videojuegos correspondiente al nombre
+     * @throws SQLException Si ocurre un error al obtener el videojuego
+     */
+    public List<Videojuegos> buscarVideojuegosPorTitulo(String titulo) throws SQLException {
+        List<Videojuegos> listaVideojuegos = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionMySQL.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECTBUSQUEDANOMBRE);
+            stmt.setString(1, titulo);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Videojuegos videojuego = new Videojuegos(
+                        rs.getInt("id"),
+                        rs.getString("titulo"),
+                        rs.getString("plataforma"),
+                        rs.getString("genero"),
+                        rs.getDouble("precio"),
+                        rs.getInt("stock"),
+                        rs.getBytes("imagen")
+                );
+                listaVideojuegos.add(videojuego);
+            }
+        } finally {
+            ConnectionMySQL.close(rs);
+            ConnectionMySQL.close(stmt);
+            ConnectionMySQL.close(conn);
+        }
+        return listaVideojuegos;
     }
 
     /**
