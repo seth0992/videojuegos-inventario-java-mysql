@@ -759,7 +759,9 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
    - Formulario (JFrame Form) para listar y buscar videojuegos. A esta ventana la llamaremos frmListaVideojuegos y su diseño se puede ver en la siguiente imagen:
      - Diseño del frmListaVideojuegos:
 
-     - Desglose de controles utilizados:
+    ![GUIControlVideoJuegos](./img/frmLista.png)
+
+    - Desglose de controles utilizados:
 
 <table>
         <thead>
@@ -810,9 +812,20 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
             <td>Variable Name</td>
             <td>btnActualizar</td>
           </tr>
+          <tr>
+            <td>JButton</td>
+            <td>text</td>
+            <td>Agregar</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>Variable Name</td>
+            <td>btnAgregar</td>
+          </tr>
         </tbody>
 </table>
-1. 
+
+
 
 
 
