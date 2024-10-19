@@ -26,7 +26,6 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
 
     ```sql
     -- Crear la base de datos 'inventario_videojuegos'
-    
     CREATE DATABASE db_inventario_videojuegos;
 
     -- Utilizar la base de datos 'inventario_videojuegos'
@@ -34,15 +33,13 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
 
     -- Crear la tabla 'videojuegos'
     CREATE TABLE videojuegos (
-        id INT AUTO_INCREMENT PRIMARY KEY,  --Auto incremental y clave primaria
-        titulo VARCHAR(255) NOT NULL,       --VARCHAR con un máximo de 255 caracteres, no puede ser nula
-        plataforma VARCHAR(255) NOT NULL,   --VARCHAR con un máximo de 255 caracteres, no puede ser nula
-        genero VARCHAR(255) NOT NULL,       --VARCHAR con un máximo de 255 caracteres, no puede ser nula
-        precio DECIMAL(10, 2) NOT NULL,     --DECIMAL con un total de 10 dígitos y 2 decimales, no puede ser nula
-        stock INT NOT NULL,                 --Entero, no puede ser nula
-        imagen LONGBLOB                     --LONGBLOB para almacenar datos binarios grandes, como imágenes
+        id INT AUTO_INCREMENT PRIMARY KEY,  -- Auto incremental y clave primaria
+        titulo VARCHAR(255) NOT NULL,       -- VARCHAR con un máximo de 255 caracteres, no puede ser nula
+        plataforma VARCHAR(255) NOT NULL,   -- VARCHAR con un máximo de 255 caracteres, no puede ser nula
+        genero VARCHAR(255) NOT NULL,       -- VARCHAR con un máximo de 255 caracteres, no puede ser nula
+        precio DECIMAL(10, 2) NOT NULL,     -- DECIMAL con un total de 10 dígitos y 2 decimales, no puede ser nula
+        stock INT NOT NULL                 -- Entero, no puede ser nula        
     );
-
     ```
 
 2. **Creación y Configuración del Proyecto:**
@@ -78,7 +75,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
     </dependencies>
     ```
 
-    Esto gusto después de la etiqueta ```</properties>``` y antes de la etiqueta ```</project>```
+    Esto justo después de la etiqueta ```</properties>``` y antes de la etiqueta ```</project>```
 
     Ejemplo de la estructura del final del archivo **pom.xml**:
 
@@ -104,8 +101,9 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         private static String JDBC_DB = "db_inventario_videojuegos";
         // URL de conexión a la base de datos
         private static String JDBC_URL = "jdbc:mysql://localhost:3306/" + JDBC_DB
-                + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
-                + "&useSSL=false";
+            + "?useUnicode=true&useJDBCCompliantTimezoneShift=true"
+            + "&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false"
+            + "&allowPublicKeyRetrieval=true";
         // Usuario de la base de datos
         private static String JDBC_USER = "root";
         // Contraseña de la base de datos
@@ -189,10 +187,10 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
     package Models;
 
     /**
-     * Clase que representa un videojuego con sus atributos y métodos asociados.
-     * 
-     * @autor seth
-     */
+    * Clase que representa un videojuego con sus atributos y métodos asociados.
+    * 
+    * @autor seth
+    */
     public class Videojuegos {
         
         // Atributos privados de la clase
@@ -202,168 +200,147 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         private String genero;         // Género del videojuego (ej. Aventura, Acción)
         private double precio;         // Precio del videojuego
         private int stock;             // Cantidad de unidades disponibles en stock
-        private byte[] imagen;         // Imagen del videojuego almacenada como un arreglo de bytes (BLOB)
-
+      
         /**
-         * Constructor que inicializa un objeto Videojuegos con los atributos dados.
-         *
-         * @param titulo Título del videojuego
-         * @param plataforma Plataforma del videojuego
-         * @param genero Género del videojuego
-         * @param precio Precio del videojuego
-         * @param stock Cantidad de unidades disponibles
-         * @param imagen Imagen del videojuego en formato byte[]
-         */
-        public Videojuegos(String titulo, String plataforma, String genero, double precio, int stock, byte[] imagen) {
+        * Constructor que inicializa un objeto Videojuegos con los atributos dados.
+        *
+        * @param titulo Título del videojuego
+        * @param plataforma Plataforma del videojuego
+        * @param genero Género del videojuego
+        * @param precio Precio del videojuego
+        * @param stock Cantidad de unidades disponibles
+        */
+        public Videojuegos(String titulo, String plataforma, String genero, double precio, int stock) {
             this.titulo = titulo;
             this.plataforma = plataforma;
             this.genero = genero;
             this.precio = precio;
             this.stock = stock;
-            this.imagen = imagen;
+          
         }
 
         /**
-         * Constructor que inicializa un objeto Videojuegos con todos los atributos, incluido el ID.
-         *
-         * @param id Identificador único del videojuego
-         * @param titulo Título del videojuego
-         * @param plataforma Plataforma del videojuego
-         * @param genero Género del videojuego
-         * @param precio Precio del videojuego
-         * @param stock Cantidad de unidades disponibles
-         * @param imagen Imagen del videojuego en formato byte[]
-         */
-        public Videojuegos(int id, String titulo, String plataforma, String genero, double precio, int stock, byte[] imagen) {
+        * Constructor que inicializa un objeto Videojuegos con todos los atributos, incluido el ID.
+        *
+        * @param id Identificador único del videojuego
+        * @param titulo Título del videojuego
+        * @param plataforma Plataforma del videojuego
+        * @param genero Género del videojuego
+        * @param precio Precio del videojuego
+        * @param stock Cantidad de unidades disponibles
+        */
+        public Videojuegos(int id, String titulo, String plataforma, String genero, double precio, int stock) {
             this.id = id;
             this.titulo = titulo;
             this.plataforma = plataforma;
             this.genero = genero;
             this.precio = precio;
             this.stock = stock;
-            this.imagen = imagen;
         }
 
         // Métodos getter y setter para acceder y modificar los atributos privados
 
         /**
-         * Obtiene el ID del videojuego.
-         *
-         * @return ID del videojuego
-         */
+        * Obtiene el ID del videojuego.
+        *
+        * @return ID del videojuego
+        */
         public int getId() {
             return id;
         }
 
         /**
-         * Obtiene el título del videojuego.
-         *
-         * @return Título del videojuego
-         */
+        * Obtiene el título del videojuego.
+        *
+        * @return Título del videojuego
+        */
         public String getTitulo() {
             return titulo;
         }
 
         /**
-         * Establece el título del videojuego.
-         *
-         * @param titulo Nuevo título del videojuego
-         */
+        * Establece el título del videojuego.
+        *
+        * @param titulo Nuevo título del videojuego
+        */
         public void setTitulo(String titulo) {
             this.titulo = titulo;
         }
 
         /**
-         * Obtiene la plataforma del videojuego.
-         *
-         * @return Plataforma del videojuego
-         */
+        * Obtiene la plataforma del videojuego.
+        *
+        * @return Plataforma del videojuego
+        */
         public String getPlataforma() {
             return plataforma;
         }
 
         /**
-         * Establece la plataforma del videojuego.
-         *
-         * @param plataforma Nueva plataforma del videojuego
-         */
+        * Establece la plataforma del videojuego.
+        *
+        * @param plataforma Nueva plataforma del videojuego
+        */
         public void setPlataforma(String plataforma) {
             this.plataforma = plataforma;
         }
 
         /**
-         * Obtiene el género del videojuego.
-         *
-         * @return Género del videojuego
-         */
+        * Obtiene el género del videojuego.
+        *
+        * @return Género del videojuego
+        */
         public String getGenero() {
             return genero;
         }
 
         /**
-         * Establece el género del videojuego.
-         *
-         * @param genero Nuevo género del videojuego
-         */
+        * Establece el género del videojuego.
+        *
+        * @param genero Nuevo género del videojuego
+        */
         public void setGenero(String genero) {
             this.genero = genero;
         }
 
         /**
-         * Obtiene el precio del videojuego.
-         *
-         * @return Precio del videojuego
-         */
+        * Obtiene el precio del videojuego.
+        *
+        * @return Precio del videojuego
+        */
         public double getPrecio() {
             return precio;
         }
 
         /**
-         * Establece el precio del videojuego.
-         *
-         * @param precio Nuevo precio del videojuego
-         */
+        * Establece el precio del videojuego.
+        *
+        * @param precio Nuevo precio del videojuego
+        */
         public void setPrecio(double precio) {
             this.precio = precio;
         }
 
         /**
-         * Obtiene la cantidad de unidades disponibles del videojuego.
-         *
-         * @return Cantidad de unidades disponibles
-         */
+        * Obtiene la cantidad de unidades disponibles del videojuego.
+        *
+        * @return Cantidad de unidades disponibles
+        */
         public int getStock() {
             return stock;
         }
 
         /**
-         * Establece la cantidad de unidades disponibles del videojuego.
-         *
-         * @param stock Nueva cantidad de unidades disponibles
-         */
+        * Establece la cantidad de unidades disponibles del videojuego.
+        *
+        * @param stock Nueva cantidad de unidades disponibles
+        */
         public void setStock(int stock) {
             this.stock = stock;
         }
 
-        /**
-         * Obtiene la imagen del videojuego.
-         *
-         * @return Imagen del videojuego en formato byte[]
-         */
-        public byte[] getImagen() {
-            return imagen;
-        }
-
-        /**
-         * Establece la imagen del videojuego.
-         *
-         * @param imagen Nueva imagen del videojuego en formato byte[]
-         */
-        public void setImagen(byte[] imagen) {
-            this.imagen = imagen;
-        }
-
     }
+
 
     ```
 
@@ -377,25 +354,27 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
     import java.util.List;
 
     /**
-     * Clase que maneja las operaciones de base de datos para la entidad Videojuegos.
-     * 
-     * @autor seth
-     */
+    * Clase que maneja las operaciones de base de datos para la entidad
+    * Videojuegos.
+    *
+    * @autor seth
+    */
     public class VideojuegosDAO {
 
         // Consultas SQL utilizadas en la clase
-        private final String SQL_INSERT = "INSERT INTO videojuegos (titulo, plataforma, genero, precio, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)";
-        private final String SQL_UPDATE = "UPDATE videojuegos SET titulo = ?, plataforma = ?, genero = ?, precio = ?, stock = ?, imagen = ? WHERE id = ?";
+        private final String SQL_INSERT = "INSERT INTO videojuegos (titulo, plataforma, genero, precio, stock) VALUES (?, ?, ?, ?, ?)";
+        private final String SQL_UPDATE = "UPDATE videojuegos SET titulo = ?, plataforma = ?, genero = ?, precio = ?, stock = ? WHERE id = ?";
         private final String SQL_DELETE = "DELETE FROM videojuegos WHERE id = ?";
         private final String SQL_SELECT = "SELECT * FROM videojuegos";
+        private final String SQL_SELECTBUSQUEDAID = "SELECT * FROM videojuegos WHERE id = ?";
         private final String SQL_SELECTBUSQUEDANOMBRE = "SELECT * FROM videojuegos WHERE titulo = ?";
 
         /**
-         * Método para insertar un nuevo videojuego en la base de datos.
-         *
-         * @param videojuego El objeto Videojuegos a insertar
-         * @throws SQLException Si ocurre un error al insertar el videojuego
-         */
+        * Método para insertar un nuevo videojuego en la base de datos.
+        *
+        * @param videojuego El objeto Videojuegos a insertar
+        * @throws SQLException Si ocurre un error al insertar el videojuego
+        */
         public void insertarVideojuego(Videojuegos videojuego) throws SQLException {
             Connection conn = null; // Declaramos la conexión
             PreparedStatement stmt = null; // Declaramos el PreparedStatement
@@ -409,7 +388,6 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
                 stmt.setString(3, videojuego.getGenero());
                 stmt.setDouble(4, videojuego.getPrecio());
                 stmt.setInt(5, videojuego.getStock());
-                stmt.setBytes(6, videojuego.getImagen());
                 stmt.executeUpdate(); // Ejecutamos la consulta de inserción
             } finally {
                 ConnectionMySQL.close(stmt); // Cerramos el PreparedStatement
@@ -418,11 +396,11 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         }
 
         /**
-         * Método para actualizar un videojuego existente en la base de datos.
-         *
-         * @param videojuego El objeto Videojuegos a actualizar
-         * @throws SQLException Si ocurre un error al actualizar el videojuego
-         */
+        * Método para actualizar un videojuego existente en la base de datos.
+        *
+        * @param videojuego El objeto Videojuegos a actualizar
+        * @throws SQLException Si ocurre un error al actualizar el videojuego
+        */
         public void actualizarVideojuego(Videojuegos videojuego) throws SQLException {
             Connection conn = null; // Declaramos la conexión
             PreparedStatement stmt = null; // Declaramos el PreparedStatement
@@ -436,8 +414,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
                 stmt.setString(3, videojuego.getGenero());
                 stmt.setDouble(4, videojuego.getPrecio());
                 stmt.setInt(5, videojuego.getStock());
-                stmt.setBytes(6, videojuego.getImagen());
-                stmt.setInt(7, videojuego.getId());
+                stmt.setInt(6, videojuego.getId());
                 stmt.executeUpdate(); // Ejecutamos la consulta de actualización
             } finally {
                 ConnectionMySQL.close(stmt); // Cerramos el PreparedStatement
@@ -446,11 +423,11 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         }
 
         /**
-         * Método para eliminar un videojuego de la base de datos.
-         *
-         * @param id El ID del videojuego a eliminar
-         * @throws SQLException Si ocurre un error al eliminar el videojuego
-         */
+        * Método para eliminar un videojuego de la base de datos.
+        *
+        * @param id El ID del videojuego a eliminar
+        * @throws SQLException Si ocurre un error al eliminar el videojuego
+        */
         public void eliminarVideojuego(int id) throws SQLException {
             Connection conn = null; // Declaramos la conexión
             PreparedStatement stmt = null; // Declaramos el PreparedStatement
@@ -467,12 +444,12 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         }
 
         /**
-         * Método para obtener un videojuego por su ID.
-         *
-         * @param id El ID del videojuego a obtener
-         * @return El objeto Videojuegos correspondiente al ID
-         * @throws SQLException Si ocurre un error al obtener el videojuego
-         */
+        * Método para obtener un videojuego por su ID.
+        *
+        * @param id El ID del videojuego a obtener
+        * @return El objeto Videojuegos correspondiente al ID
+        * @throws SQLException Si ocurre un error al obtener el videojuego
+        */
         public Videojuegos obtenerVideojuegoPorId(int id) throws SQLException {
             Videojuegos videojuego = null; // Declaramos el objeto Videojuegos
 
@@ -482,7 +459,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
 
             try {
                 conn = ConnectionMySQL.getConnection(); // Obtenemos la conexión desde ConnectionMySQL
-                stmt = conn.prepareStatement(SQL_SELECTBUSQUEDANOMBRE); // Preparamos la consulta SQL para seleccionar por nombre
+                stmt = conn.prepareStatement(SQL_SELECTBUSQUEDAID); // Preparamos la consulta SQL para seleccionar por id
                 stmt.setInt(1, id); // Asignamos el valor del ID al parámetro de la consulta SQL
                 rs = stmt.executeQuery(); // Ejecutamos la consulta de selección
 
@@ -494,8 +471,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
                             rs.getString("plataforma"),
                             rs.getString("genero"),
                             rs.getDouble("precio"),
-                            rs.getInt("stock"),
-                            rs.getBytes("imagen")
+                            rs.getInt("stock")
                     );
                 }
             } finally {
@@ -507,11 +483,49 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
         }
 
         /**
-         * Método para obtener todos los videojuegos de la base de datos.
-         *
-         * @return Lista de objetos Videojuegos
-         * @throws SQLException Si ocurre un error al obtener los videojuegos
-         */
+        * Método para obtener un videojuego por su ID.
+        *
+        * @param nombre El nombre del videojuego a obtener
+        * @return El la lista de Videojuegos correspondiente al nombre
+        * @throws SQLException Si ocurre un error al obtener el videojuego
+        */
+        public List<Videojuegos> buscarVideojuegosPorTitulo(String titulo) throws SQLException {
+            List<Videojuegos> listaVideojuegos = new ArrayList<>();
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            try {
+                conn = ConnectionMySQL.getConnection();
+                stmt = conn.prepareStatement(SQL_SELECTBUSQUEDANOMBRE);
+                stmt.setString(1, titulo);
+                rs = stmt.executeQuery();
+
+                while (rs.next()) {
+                    Videojuegos videojuego = new Videojuegos(
+                            rs.getInt("id"),
+                            rs.getString("titulo"),
+                            rs.getString("plataforma"),
+                            rs.getString("genero"),
+                            rs.getDouble("precio"),
+                            rs.getInt("stock")
+                    );
+                    listaVideojuegos.add(videojuego);
+                }
+            } finally {
+                ConnectionMySQL.close(rs);
+                ConnectionMySQL.close(stmt);
+                ConnectionMySQL.close(conn);
+            }
+            return listaVideojuegos;
+        }
+
+        /**
+        * Método para obtener todos los videojuegos de la base de datos.
+        *
+        * @return Lista de objetos Videojuegos
+        * @throws SQLException Si ocurre un error al obtener los videojuegos
+        */
         public List<Videojuegos> obtenerTodosLosVideojuegos() throws SQLException {
             List<Videojuegos> listaVideojuegos = new ArrayList<>(); // Creamos una lista para almacenar los videojuegos
 
@@ -532,8 +546,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
                             rs.getString("plataforma"),
                             rs.getString("genero"),
                             rs.getDouble("precio"),
-                            rs.getInt("stock"),
-                            rs.getBytes("imagen")
+                            rs.getInt("stock")
                     );
                     listaVideojuegos.add(videojuego);
                 }
@@ -545,6 +558,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
             return listaVideojuegos; // Retornamos la lista de videojuegos
         }
     }
+
     ```
 
     [!Note]
@@ -690,39 +704,6 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
     <td>txtStock</td>
   </tr>
 
- <tr>
-    <td rowspan=2>Button</td>
-    <td>text</td>
-    <td>Buscar Imagen</td>
-  </tr>
-  <tr>
-    <td>Variable Name</td>
-    <td>btnImagen</td>
-  </tr>
-
- <tr>
-    <td rowspan=5>JLabel</td>
-    <td>text</td>
-    <td> </td>
-  </tr>
-  <tr>
-    <td>Variable Name</td>
-    <td>lblImagen</td>
-  </tr>
-    <tr>
-    <td>Horizontal Size	</td>
-    <td>200</td>
-  </tr>
-    </tr>
-    <tr>
-    <td>Vertical Size</td>
-    <td>200</td>
-  </tr>
-    </tr>
-    <tr>
-    <td>Icon</td>
-    <td>Buscar el icono en el paquete de recurso [imagen.png]</td>
-  </tr>
 
  <tr>
     <td rowspan=2>Button</td>
@@ -754,7 +735,87 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
   </tr>
 </table>
 
-7. Crear el segundo JFrame Form:
+Ahora se creara los eventos de cada botón y su funcionalidad
+
+- Primero se deberá crear una variable a nivel de clase
+  
+```java
+ private int idVideojuego = -1;
+```
+
+- Luego se deberá agregar un constructor más, a como se muestra en el código:
+
+```java
+public frmControlVideoJuego(Videojuegos videojuego) {
+        initComponents();
+
+        // Cargar los datos del videojuego en el formulario
+        this.idVideojuego = videojuego.getId();
+        txtTitulo.setText(videojuego.getTitulo());
+        cmbPlataforma.setSelectedItem(videojuego.getPlataforma());
+        cmbGenero.setSelectedItem(videojuego.getGenero());
+        txtPrecio.setText(String.valueOf(videojuego.getPrecio()));
+        txtStock.setText(String.valueOf(videojuego.getStock()));
+    }
+```
+
+- Ahora los siguientes eventos:
+  
+```java
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        try {
+            VideojuegosDAO dao = new VideojuegosDAO();
+
+            // Verificar si se trata de una actualización o un nuevo registro
+            if (idVideojuego == -1) {
+                // Nuevo videojuego
+                Videojuegos videojuego = new Videojuegos(
+                        txtTitulo.getText(),
+                        (String) cmbPlataforma.getSelectedItem(),
+                        (String) cmbGenero.getSelectedItem(),
+                        Double.parseDouble(txtPrecio.getText()),
+                        Integer.parseInt(txtStock.getText())
+                );
+                dao.insertarVideojuego(videojuego);
+                JOptionPane.showMessageDialog(null, "Videojuego registrado con éxito");
+            } else {
+                // Actualizar videojuego existente
+                Videojuegos videojuego = new Videojuegos(
+                        idVideojuego, // Pasar el ID para la actualización
+                        txtTitulo.getText(),
+                        (String) cmbPlataforma.getSelectedItem(),
+                        (String) cmbGenero.getSelectedItem(),
+                        Double.parseDouble(txtPrecio.getText()),
+                        Integer.parseInt(txtStock.getText())
+                );
+                dao.actualizarVideojuego(videojuego);
+                JOptionPane.showMessageDialog(null, "Videojuego actualizado con éxito");
+                
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al guardar el videojuego");
+        }
+    }                                          
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // Verificar si se trata de una eliminación 
+          VideojuegosDAO dao = new VideojuegosDAO();
+            if (idVideojuego != -1) {
+              try {
+                  dao.eliminarVideojuego(idVideojuego);
+              } catch (SQLException ex) {
+                  ex.printStackTrace();
+              }
+                JOptionPane.showMessageDialog(null, "Videojuego eliminado con éxito");
+              
+            } 
+    }                                           
+
+```
+
+**Crear el segundo JFrame Form:**
 
    - Formulario (JFrame Form) para listar y buscar videojuegos. A esta ventana la llamaremos frmListaVideojuegos y su diseño se puede ver en la siguiente imagen:
      - Diseño del frmListaVideojuegos:
@@ -805,12 +866,22 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
           <tr>
             <td>JButton</td>
             <td>text</td>
-            <td>Actualizar</td>
+            <td>Actualizar Datos</td>
           </tr>
           <tr>
             <td>JButton</td>
             <td>Variable Name</td>
             <td>btnActualizar</td>
+          </tr>
+           <tr>
+            <td>JButton</td>
+            <td>text</td>
+            <td>Modificar Datos VideoJuego</td>
+          </tr>
+          <tr>
+            <td>JButton</td>
+            <td>Variable Name</td>
+            <td>btnModificarVideoJuego</td>
           </tr>
           <tr>
             <td>JButton</td>
@@ -824,11 +895,131 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
           </tr>
         </tbody>
 </table>
+Ahora se creara los eventos de cada botón y su funcionalidad
 
+- Primero se deberá crear una variable a nivel de clase
+  
+```java
+  private VideojuegosDAO videojuegosDAO = new VideojuegosDAO();
+```
 
+- Luego se deberá modificar el constructor
 
+```java
+  public frmListaVideojuegos() {
+        initComponents();
+        cargarTabla();
+    }
+```
 
+- Ahora los siguientes eventos:
+  
+```java
+   private void cargarTabla() {
+        try {
+            // Obtener la lista de videojuegos desde la base de datos
+            List<Videojuegos> listaVideojuegos = videojuegosDAO.obtenerTodosLosVideojuegos();
 
+            // Definir el modelo de la tabla con las columnas correspondientes
+            DefaultTableModel modelo = new DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{"ID", "Título", "Plataforma", "Género", "Precio", "Stock"}
+            );
+
+            // Limpiar cualquier dato previo en la tabla
+            modelo.setRowCount(0);
+
+            // Agregar los datos de los videojuegos al modelo
+            for (Videojuegos videojuego : listaVideojuegos) {
+                modelo.addRow(new Object[]{
+                    videojuego.getId(),
+                    videojuego.getTitulo(),
+                    videojuego.getPlataforma(),
+                    videojuego.getGenero(),
+                    videojuego.getPrecio(),
+                    videojuego.getStock()
+                });
+            }
+
+            // Asignar el modelo actualizado a la tabla
+            tblVideojuegos.setModel(modelo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de los videojuegos");
+        }
+    }
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+
+        String titulo = txtBuscar.getText();
+        try {
+            // Buscar los videojuegos que coinciden con el título
+            List<Videojuegos> listaVideojuegos = videojuegosDAO.buscarVideojuegosPorTitulo(titulo);
+
+            // Definir el modelo de la tabla con las columnas correspondientes
+            DefaultTableModel modelo = new DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{"ID", "Título", "Plataforma", "Género", "Precio", "Stock"}
+            );
+
+            // Limpiar cualquier dato previo en la tabla
+            modelo.setRowCount(0);
+
+            // Agregar los datos de los videojuegos encontrados al modelo
+            for (Videojuegos videojuego : listaVideojuegos) {
+                modelo.addRow(new Object[]{
+                    videojuego.getId(),
+                    videojuego.getTitulo(),
+                    videojuego.getPlataforma(),
+                    videojuego.getGenero(),
+                    videojuego.getPrecio(),
+                    videojuego.getStock()
+                });
+            }
+
+            // Asignar el modelo actualizado a la tabla
+            tblVideojuegos.setModel(modelo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al buscar los datos de los videojuegos");
+        }
+    }                                         
+
+    private void btnModificarVideoJuegoActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        int filaSeleccionada = tblVideojuegos.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un videojuego de la tabla.");
+        } else {
+            // Obtener los datos del videojuego seleccionado de la tabla
+            int id = (int) tblVideojuegos.getValueAt(filaSeleccionada, 0);
+            String titulo = (String) tblVideojuegos.getValueAt(filaSeleccionada, 1);
+            String plataforma = (String) tblVideojuegos.getValueAt(filaSeleccionada, 2);
+            String genero = (String) tblVideojuegos.getValueAt(filaSeleccionada, 3);
+            double precio = (double) tblVideojuegos.getValueAt(filaSeleccionada, 4);
+            int stock = (int) tblVideojuegos.getValueAt(filaSeleccionada, 5);
+
+            // Crear un objeto Videojuegos con los datos seleccionados
+            Videojuegos videojuegoSeleccionado = new Videojuegos(id, titulo, plataforma, genero, precio, stock);
+
+            // Abrir el formulario frmControlVideoJuego con el videojuego seleccionado
+            frmControlVideoJuego controlVideojuegoForm = new frmControlVideoJuego(videojuegoSeleccionado);
+            controlVideojuegoForm.setVisible(true);
+        }
+    }                                                      
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // Abrir el formulario frmControlVideoJuego con el videojuego seleccionado
+        frmControlVideoJuego controlVideojuegoForm = new frmControlVideoJuego();
+        controlVideojuegoForm.setVisible(true);
+    }                                          
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        cargarTabla();
+    }                                             
+
+```
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.

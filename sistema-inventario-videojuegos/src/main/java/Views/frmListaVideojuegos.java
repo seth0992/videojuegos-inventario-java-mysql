@@ -8,6 +8,7 @@ import Models.Videojuegos;
 import Models.VideojuegosDAO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,8 +41,9 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
         tblVideojuegos = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnModificarVideoJuego = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,14 +70,26 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
             }
         });
 
-        btnActualizar.setText("Actualizar");
+        btnModificarVideoJuego.setText("Modificar Datos VideoJuego");
+        btnModificarVideoJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarVideoJuegoActionPerformed(evt);
+            }
+        });
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.setText("Actualizar Datos");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-
-        btnAgregar.setText("Agregar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +98,6 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +108,13 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModificarVideoJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,20 +130,32 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarVideoJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String titulo = txtBuscar.getText();
+    
+    private void cargarTabla() {
         try {
-            List<Videojuegos> listaVideojuegos = videojuegosDAO.buscarVideojuegosPorTitulo(titulo);
-            DefaultTableModel modelo = (DefaultTableModel) tblVideojuegos.getModel();
+            // Obtener la lista de videojuegos desde la base de datos
+            List<Videojuegos> listaVideojuegos = videojuegosDAO.obtenerTodosLosVideojuegos();
+
+            // Definir el modelo de la tabla con las columnas correspondientes
+            DefaultTableModel modelo = new DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{"ID", "Título", "Plataforma", "Género", "Precio", "Stock"}
+            );
+
+            // Limpiar cualquier dato previo en la tabla
             modelo.setRowCount(0);
+
+            // Agregar los datos de los videojuegos al modelo
             for (Videojuegos videojuego : listaVideojuegos) {
                 modelo.addRow(new Object[]{
                     videojuego.getId(),
@@ -135,13 +166,83 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
                     videojuego.getStock()
                 });
             }
+
+            // Asignar el modelo actualizado a la tabla
+            tblVideojuegos.setModel(modelo);
+
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos de los videojuegos");
+        }
+    }
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        String titulo = txtBuscar.getText();
+        try {
+            // Buscar los videojuegos que coinciden con el título
+            List<Videojuegos> listaVideojuegos = videojuegosDAO.buscarVideojuegosPorTitulo(titulo);
+
+            // Definir el modelo de la tabla con las columnas correspondientes
+            DefaultTableModel modelo = new DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{"ID", "Título", "Plataforma", "Género", "Precio", "Stock"}
+            );
+
+            // Limpiar cualquier dato previo en la tabla
+            modelo.setRowCount(0);
+
+            // Agregar los datos de los videojuegos encontrados al modelo
+            for (Videojuegos videojuego : listaVideojuegos) {
+                modelo.addRow(new Object[]{
+                    videojuego.getId(),
+                    videojuego.getTitulo(),
+                    videojuego.getPlataforma(),
+                    videojuego.getGenero(),
+                    videojuego.getPrecio(),
+                    videojuego.getStock()
+                });
+            }
+
+            // Asignar el modelo actualizado a la tabla
+            tblVideojuegos.setModel(modelo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al buscar los datos de los videojuegos");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnModificarVideoJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarVideoJuegoActionPerformed
+        int filaSeleccionada = tblVideojuegos.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un videojuego de la tabla.");
+        } else {
+            // Obtener los datos del videojuego seleccionado de la tabla
+            int id = (int) tblVideojuegos.getValueAt(filaSeleccionada, 0);
+            String titulo = (String) tblVideojuegos.getValueAt(filaSeleccionada, 1);
+            String plataforma = (String) tblVideojuegos.getValueAt(filaSeleccionada, 2);
+            String genero = (String) tblVideojuegos.getValueAt(filaSeleccionada, 3);
+            double precio = (double) tblVideojuegos.getValueAt(filaSeleccionada, 4);
+            int stock = (int) tblVideojuegos.getValueAt(filaSeleccionada, 5);
+
+            // Crear un objeto Videojuegos con los datos seleccionados
+            Videojuegos videojuegoSeleccionado = new Videojuegos(id, titulo, plataforma, genero, precio, stock);
+
+            // Abrir el formulario frmControlVideoJuego con el videojuego seleccionado
+            frmControlVideoJuego controlVideojuegoForm = new frmControlVideoJuego(videojuegoSeleccionado);
+            controlVideojuegoForm.setVisible(true);
+        }
+    }//GEN-LAST:event_btnModificarVideoJuegoActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // Abrir el formulario frmControlVideoJuego con el videojuego seleccionado
+        frmControlVideoJuego controlVideojuegoForm = new frmControlVideoJuego();
+        controlVideojuegoForm.setVisible(true);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        cargarTabla();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
@@ -179,30 +280,12 @@ public class frmListaVideojuegos extends javax.swing.JFrame {
         });
     }
 
-    private void cargarTabla() {
-        try {
-            List<Videojuegos> listaVideojuegos = videojuegosDAO.obtenerTodosLosVideojuegos();
-            DefaultTableModel modelo = (DefaultTableModel) tblVideojuegos.getModel();
-            modelo.setRowCount(0);
-            for (Videojuegos videojuego : listaVideojuegos) {
-                modelo.addRow(new Object[]{
-                    videojuego.getId(),
-                    videojuego.getTitulo(),
-                    videojuego.getPlataforma(),
-                    videojuego.getGenero(),
-                    videojuego.getPrecio(),
-                    videojuego.getStock()
-                });
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnModificarVideoJuego;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVideojuegos;

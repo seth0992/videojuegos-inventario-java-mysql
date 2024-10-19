@@ -14,8 +14,7 @@ public class Videojuegos {
     private String genero;         // Género del videojuego (ej. Aventura, Acción)
     private double precio;         // Precio del videojuego
     private int stock;             // Cantidad de unidades disponibles en stock
-    private byte[] imagen;         // Imagen del videojuego almacenada como un arreglo de bytes (BLOB)
-
+   
     /**
      * Constructor que inicializa un objeto Videojuegos con los atributos dados.
      *
@@ -24,15 +23,14 @@ public class Videojuegos {
      * @param genero Género del videojuego
      * @param precio Precio del videojuego
      * @param stock Cantidad de unidades disponibles
-     * @param imagen Imagen del videojuego en formato byte[]
      */
-    public Videojuegos(String titulo, String plataforma, String genero, double precio, int stock, byte[] imagen) {
+    public Videojuegos(String titulo, String plataforma, String genero, double precio, int stock) {
         this.titulo = titulo;
         this.plataforma = plataforma;
         this.genero = genero;
         this.precio = precio;
         this.stock = stock;
-        this.imagen = imagen;
+       
     }
 
     /**
@@ -44,16 +42,14 @@ public class Videojuegos {
      * @param genero Género del videojuego
      * @param precio Precio del videojuego
      * @param stock Cantidad de unidades disponibles
-     * @param imagen Imagen del videojuego en formato byte[]
      */
-    public Videojuegos(int id, String titulo, String plataforma, String genero, double precio, int stock, byte[] imagen) {
+    public Videojuegos(int id, String titulo, String plataforma, String genero, double precio, int stock) {
         this.id = id;
         this.titulo = titulo;
         this.plataforma = plataforma;
         this.genero = genero;
         this.precio = precio;
         this.stock = stock;
-        this.imagen = imagen;
     }
 
     // Métodos getter y setter para acceder y modificar los atributos privados
@@ -155,24 +151,6 @@ public class Videojuegos {
      */
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    /**
-     * Obtiene la imagen del videojuego.
-     *
-     * @return Imagen del videojuego en formato byte[]
-     */
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    /**
-     * Establece la imagen del videojuego.
-     *
-     * @param imagen Nueva imagen del videojuego en formato byte[]
-     */
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
     }
 
 }

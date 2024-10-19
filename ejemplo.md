@@ -1,10 +1,8 @@
 
 
-1. **Clonar el repositorio:**
-    ```sh
-    git clone https://github.com/tuusuario/sistema-inventario-videojuegos.git
-    cd sistema-inventario-videojuegos
-    ```
+1. **Crear el proyecto:**
+
+El proyecto se creara en Java With Maven.
 
 2. **Configurar la base de datos:**
     - Crear la base de datos en MySQL:
@@ -17,8 +15,7 @@
         plataforma VARCHAR(255) NOT NULL,
         genero VARCHAR(255) NOT NULL,
         precio DECIMAL(10, 2) NOT NULL,
-        stock INT NOT NULL,
-        imagen LONGBLOB
+        stock INT NOT NULL
     );
     ```
 

@@ -18,7 +18,9 @@ public class ConnectionMySQL {
     private static String JDBC_DB = "db_inventario_videojuegos";
     // URL de conexión a la base de datos
     private static String JDBC_URL = "jdbc:mysql://localhost:3306/" + JDBC_DB
-            + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false"+ "&allowPublicKeyRetrieval=true";
+            + "?useUnicode=true&useJDBCCompliantTimezoneShift=true"
+            + "&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false"
+            + "&allowPublicKeyRetrieval=true";
     
     // Usuario de la base de datos
     private static String JDBC_USER = "root";

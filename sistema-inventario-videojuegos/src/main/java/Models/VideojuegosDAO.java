@@ -13,8 +13,8 @@ import java.util.List;
 public class VideojuegosDAO {
 
     // Consultas SQL utilizadas en la clase
-    private final String SQL_INSERT = "INSERT INTO videojuegos (titulo, plataforma, genero, precio, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String SQL_UPDATE = "UPDATE videojuegos SET titulo = ?, plataforma = ?, genero = ?, precio = ?, stock = ?, imagen = ? WHERE id = ?";
+    private final String SQL_INSERT = "INSERT INTO videojuegos (titulo, plataforma, genero, precio, stock) VALUES (?, ?, ?, ?, ?)";
+    private final String SQL_UPDATE = "UPDATE videojuegos SET titulo = ?, plataforma = ?, genero = ?, precio = ?, stock = ? WHERE id = ?";
     private final String SQL_DELETE = "DELETE FROM videojuegos WHERE id = ?";
     private final String SQL_SELECT = "SELECT * FROM videojuegos";
     private final String SQL_SELECTBUSQUEDAID = "SELECT * FROM videojuegos WHERE id = ?";
@@ -39,7 +39,6 @@ public class VideojuegosDAO {
             stmt.setString(3, videojuego.getGenero());
             stmt.setDouble(4, videojuego.getPrecio());
             stmt.setInt(5, videojuego.getStock());
-            stmt.setBytes(6, videojuego.getImagen());
             stmt.executeUpdate(); // Ejecutamos la consulta de inserción
         } finally {
             ConnectionMySQL.close(stmt); // Cerramos el PreparedStatement
@@ -66,8 +65,7 @@ public class VideojuegosDAO {
             stmt.setString(3, videojuego.getGenero());
             stmt.setDouble(4, videojuego.getPrecio());
             stmt.setInt(5, videojuego.getStock());
-            stmt.setBytes(6, videojuego.getImagen());
-            stmt.setInt(7, videojuego.getId());
+            stmt.setInt(6, videojuego.getId());
             stmt.executeUpdate(); // Ejecutamos la consulta de actualización
         } finally {
             ConnectionMySQL.close(stmt); // Cerramos el PreparedStatement
@@ -124,8 +122,7 @@ public class VideojuegosDAO {
                         rs.getString("plataforma"),
                         rs.getString("genero"),
                         rs.getDouble("precio"),
-                        rs.getInt("stock"),
-                        rs.getBytes("imagen")
+                        rs.getInt("stock")
                 );
             }
         } finally {
@@ -162,8 +159,7 @@ public class VideojuegosDAO {
                         rs.getString("plataforma"),
                         rs.getString("genero"),
                         rs.getDouble("precio"),
-                        rs.getInt("stock"),
-                        rs.getBytes("imagen")
+                        rs.getInt("stock")
                 );
                 listaVideojuegos.add(videojuego);
             }
@@ -201,8 +197,7 @@ public class VideojuegosDAO {
                         rs.getString("plataforma"),
                         rs.getString("genero"),
                         rs.getDouble("precio"),
-                        rs.getInt("stock"),
-                        rs.getBytes("imagen")
+                        rs.getInt("stock")
                 );
                 listaVideojuegos.add(videojuego);
             }

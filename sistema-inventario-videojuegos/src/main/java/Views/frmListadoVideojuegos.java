@@ -62,22 +62,11 @@ public class frmListadoVideojuegos extends javax.swing.JFrame {
                 JLabel lblPlataforma = new JLabel("Plataforma: " + videojuego.getPlataforma());
                 JLabel lblGenero = new JLabel("Género: " + videojuego.getGenero());
                 JLabel lblPrecio = new JLabel("Precio: " + videojuego.getPrecio());
-                JLabel lblStock = new JLabel("Stock: " + videojuego.getStock());
-                
-                JLabel lblImagen = new JLabel();
-                if (videojuego.getImagen() != null) {
-                    ImageIcon icon = new ImageIcon(videojuego.getImagen());
-                    Image img = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-                    lblImagen.setIcon(new ImageIcon(img));
-                } else {
-                    lblImagen.setText("Sin Imagen");
-                    lblImagen.setHorizontalAlignment(JLabel.CENTER);
-                }
-                
+                JLabel lblStock = new JLabel("Stock: " + videojuego.getStock());               
+   
                 JButton btnModificar = new JButton("Modificar");
                 btnModificar.addActionListener(evt -> abrirFormularioModificacion(videojuego));
-
-                card.add(lblImagen);
+           
                 card.add(lblTitulo);
                 card.add(lblPlataforma);
                 card.add(lblGenero);

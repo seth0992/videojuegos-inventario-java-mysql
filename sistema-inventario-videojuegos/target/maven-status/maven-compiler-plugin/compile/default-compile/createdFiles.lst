@@ -2,9 +2,13 @@ Views\frmControlVideoJuego$2.class
 Models\Videojuegos.class
 Views\frmListadoVideojuegos$1.class
 Models\VideojuegosDAO.class
+Views\frmListaVideojuegos$2.class
 Models\ConnectionMySQL.class
 Views\frmControlVideoJuego$1.class
+Views\frmListaVideojuegos$3.class
 Views\frmListadoVideojuegos.class
 seth\sistema\inventario\videojuegos\SistemaInventarioVideojuegos.class
 Views\frmControlVideoJuego$3.class
+Views\frmListaVideojuegos.class
 Views\frmControlVideoJuego.class
+Views\frmListaVideojuegos$1.class
