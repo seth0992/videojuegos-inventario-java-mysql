@@ -585,7 +585,7 @@ Este proyecto es un sistema de gestión de inventario de videojuegos desarrollad
   <tr>
   <td>JFrame</td>
     <td>defaultCloseOperation</td>
-    <td>EXIT_ON_CLOSE</td>
+    <td>DISPOSE</td>
   </tr>
   <tr>
     <td>jLabel</td>
